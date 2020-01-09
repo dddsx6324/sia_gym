@@ -20,5 +20,5 @@ class SIA7FARMPickAndPlaceEnv(mobile_sia_7f_arm_gym_env.MobileSIA7FARMGymEnv, ut
             gripper_extra_height=0.2, target_in_the_air=True, target_offset=0.0,
             obj_range=0.1, target_range=0.1, distance_threshold=0.05,
             initial_qpos=initial_qpos, reward_type=reward_type, n_actions=4,
-            use_real_robot=False, debug_print=False)
+            use_real_robot=True, debug_print=True)
         utils.EzPickle.__init__(self)

@@ -59,7 +59,7 @@
 
                                 <body name="7f_gripper_left_outer_finger" pos="0.0525 0 -0.028" quat="0.707105 0.707108 0 0">
                                     <inertial pos="0.00025 -0.0449993 0" quat="0.707104 0.707104 0.00196419 0.00196419" mass="0.100689" diaginertia="0.000179129 0.000126093 5.76745e-05" />
-                                    <joint name="sia_7f_finger_joint" pos="0 0 0" axis="0 0 -1" limited="true" range="-1 0" />
+                                    <joint name="7f_finger_joint" pos="0 0 0" axis="0 0 -1" limited="true" range="-1 0" />
                                     <geom type="mesh" contype="0" conaffinity="0" group="1" rgba="0.792157 0.819608 0.933333 1" mesh="7f_gripper_left_outer_finger" />
                                     <geom type="mesh" rgba="0.792157 0.819608 0.933333 1" mesh="7f_gripper_left_outer_finger_collision" />
                                     <body name="7f_gripper_left_inner_finger" pos="0.0005 -0.089999 0" quat="-3.67321e-06 1 0 0">

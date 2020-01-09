@@ -54,18 +54,7 @@ class SIA7FARMROS(object):
         except rospy.exceptions.ROSException:
             rospy.logwarn('ROS node sia_7f_arm_ros_interface has not been initialized')
 
-        ####### Base Husky
-        # Topics
-        #self.rostopic_base_cmd = '/sia_7f_arm_velocity_controller/cmd_vel' # 
-        #self.rostopic_base_odometry = '/odometry/filtered' # nav_msgs/Odometry
-        #self.rostopic_base_estop = '/estop' # std_msgs/Bool
-
-        # Subscibers
-
-        # Publishers
-        #self.base_ctrl_pub = rospy.Publisher(self.rostopic_base_cmd, Twist, queue_size=1)
-
-        ####### Arm UR5
+        ####### Arm
 
         # Params
         self.arm_joint_names = ["sia_7f_arm_joint1", 
@@ -110,14 +99,13 @@ class SIA7FARMROS(object):
         self.rostopic_gripper_cmd = 'sia_7f_arm_gripper/SModelRobotOutput'
 
         # Publisher
-        self.gripper_pub_cmd = rospy.Publisher(self.rostopic_gripper_cmd, SModelRobotOutput, queue_size=1)
-
-        ####### Camera BB8 Stereo camera
+        self.gripper_pub_cmd = rospy.Publisher(self.rostopic_gripper_cmd, SModelRobotOutput, queue_size=1) 
 
         ####### Camera RGBD
 
         ####### Target
-        self.target_pose = rospy.Subscriber('/object_target', Pose)
+        self.target_position = [0,0,0]
+        self.target_pose = rospy.Subscriber('/object_target', Pose, self.object_callback)
 
 
         ####### Initialization !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!######
@@ -389,4 +377,18 @@ class SIA7FARMROS(object):
         self.gripper_pub_cmd.publish(command)
         rospy.sleep(2.0)
         rospy.logwarn("Gripper Closed")
+    def camera_get_rgb(self):
 
+        return NotImplementedError
+
+    def get_object_position(self):
+        if self.target_position[2] > 0:
+            return self.target_position
+        else:
+            rospy.logerr("No Object Position, Please check the Object")
+            return NotImplementedError
+
+    def object_callback(self, msg):
+        self.target_position[0] = msg.position.x
+        self.target_position[1] = msg.position.y
+        self.target_position[2] = msg.position.z

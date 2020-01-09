@@ -12,7 +12,7 @@ def robot_get_sia_joint_state_obs(sim):
     """
     if sim.data.qpos is not None and sim.model.joint_names:
         # names = [n for n in sim.model.joint_names if n.startswith('robot')]
-        names = [n for n in sim.model.joint_names if n.startswith('sia_7f_arm')]
+        names = [n for n in sim.model.joint_names if n.startswith('sia_7f')]
         return (
             np.array([sim.data.get_joint_qpos(name) for name in names]),
             np.array([sim.data.get_joint_qvel(name) for name in names]),
